@@ -9,6 +9,9 @@ def main():
     
     game_clock = pygame.time.Clock()
     dt = 0
+    updateable_objects = pygame.sprite.Group()
+    drawable_objects = pygame.sprite.Group()
+    Player.containers = (updateable_objects, drawable_objects)
     player_user = Player(x = SCREEN_WIDTH / 2, y = SCREEN_HEIGHT / 2)
 
     pygame.init()
@@ -18,8 +21,9 @@ def main():
             if event.type == pygame.QUIT:
                 return
         screen.fill("black", rect=None, special_flags=0)
-        player_user.update(dt)
-        player_user.draw(screen)
+        updateable_objects.update(dt)
+        for sprite in drawable_objects:
+            sprite.draw(screen)
         pygame.display.flip()
         dt = game_clock.tick(60) / 1000
         # print(f"FPS: {game_clock.get_fps():.2f}")
