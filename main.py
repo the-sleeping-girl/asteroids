@@ -1,6 +1,7 @@
 import pygame
 from constants import *
 from player import Player
+from asteroidfield import *
 
 def main():
     print("Starting Asteroids!")
@@ -11,8 +12,12 @@ def main():
     dt = 0
     updateable_objects = pygame.sprite.Group()
     drawable_objects = pygame.sprite.Group()
+    asteroids = pygame.sprite.Group()
+    AsteroidField.containers = (updateable_objects)
+    Asteroid.containers = (asteroids, updateable_objects, drawable_objects)
     Player.containers = (updateable_objects, drawable_objects)
     player_user = Player(x = SCREEN_WIDTH / 2, y = SCREEN_HEIGHT / 2)
+    asteroid_field = AsteroidField()
 
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
