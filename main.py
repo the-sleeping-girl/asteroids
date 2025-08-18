@@ -3,6 +3,7 @@ import sys
 import pygame
 from constants import *
 from player import Player
+from asteroid import Asteroid
 from asteroidfield import *
 from shot import Shot
 
@@ -38,6 +39,11 @@ def main():
                 sys.exit()
         for sprite in drawable_objects:
             sprite.draw(screen)
+        for asteroid in asteroids:
+            for bullet in shots:
+                if asteroid.collision_detection(bullet):
+                    bullet.kill()
+                    asteroid.kill()
         pygame.display.flip()
         dt = game_clock.tick(60) / 1000
         # print(f"FPS: {game_clock.get_fps():.2f}")
