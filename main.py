@@ -43,7 +43,7 @@ def main():
             for bullet in shots:
                 if asteroid.collision_detection(bullet):
                     bullet.kill()
-                    asteroid.kill()
+                    asteroid.split()
         pygame.display.flip()
         dt = game_clock.tick(60) / 1000
         # print(f"FPS: {game_clock.get_fps():.2f}")
